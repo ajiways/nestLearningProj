@@ -25,7 +25,7 @@ export class BrandService {
 
     if (!result) {
       throw new HttpException(
-        'Attachment with the provided id was not found',
+        'Brand with the provided id was not found',
         HttpStatus.NOT_FOUND,
       );
     }

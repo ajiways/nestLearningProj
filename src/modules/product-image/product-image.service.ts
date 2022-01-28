@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductImage } from './product-image.entity';
@@ -11,10 +11,27 @@ export class ProductImageService {
   ) {}
 
   async findAll() {
-    return await this.productImageRepository.find();
+    const result = await this.productImageRepository.find();
+
+    if (result.length === 0) {
+      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
+    }
+
+    return result;
   }
 
   async findOne(id: number) {
-    return await this.productImageRepository.findOne({ where: { id: id } });
+    const result = await this.productImageRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!result) {
+      throw new HttpException(
+        'Cart with the provided id was not found',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return result;
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Payment } from './payment.entity';
@@ -11,10 +11,25 @@ export class PaymentService {
   ) {}
 
   async findAll() {
-    return await this.paymentRepository.find();
+    const result = await this.paymentRepository.find();
+
+    if (result.length === 0) {
+      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
+    }
+
+    return result;
   }
 
   async findOne(id: number) {
-    return await this.paymentRepository.findOne({ where: { id: id } });
+    const result = await this.paymentRepository.findOne({ where: { id: id } });
+
+    if (!result) {
+      throw new HttpException(
+        'Cart with the provided id was not found',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return result;
   }
 }
