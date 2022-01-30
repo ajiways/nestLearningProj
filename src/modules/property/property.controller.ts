@@ -6,6 +6,7 @@ import { PropertyService } from './property.service';
 export class PropertyController {
   constructor(private readonly propertyService: PropertyService) {}
 
+  @Get()
   async getAllProperties() {
     return this.propertyService.findAll();
   }
