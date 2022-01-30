@@ -19,11 +19,11 @@ export function getOrmConfig(): TypeOrmModuleOptions {
     namingStrategy: new SnakeNamingStrategy(),
     entities: [join(__dirname, '..', '/modules', '/**', '/*.entity.{ts,js}')],
     synchronize: false,
-    migrations: [join(__dirname, '..', '/migrations', '*.{ts,js}')],
+    migrations: [join(__dirname, '..', '/migrations', '/*.{ts,js}')],
     migrationsTableName: 'migrations',
     logging: 'all',
     cli: {
-      migrationsDir: join(__dirname, '..', '/migrations', '/*.{ts,js}'),
+      migrationsDir: join(__dirname, '..', '/migrations'),
     },
   };
 }
