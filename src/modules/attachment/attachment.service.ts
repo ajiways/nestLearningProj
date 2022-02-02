@@ -11,13 +11,7 @@ export class AttachmentService {
   ) {}
 
   async findAll() {
-    const result = await this.attachmentsRepository.find();
-
-    if (result.length === 0) {
-      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
-    }
-
-    return result;
+    return await this.attachmentsRepository.find();
   }
 
   async findOne(id: number) {

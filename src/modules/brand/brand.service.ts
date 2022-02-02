@@ -11,13 +11,7 @@ export class BrandService {
   ) {}
 
   async findAll() {
-    const result = await this.brandRepository.find();
-
-    if (result.length === 0) {
-      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
-    }
-
-    return result;
+    return await this.brandRepository.find();
   }
 
   async findOne(id: number) {

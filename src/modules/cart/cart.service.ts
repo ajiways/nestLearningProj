@@ -57,13 +57,7 @@ export class CartService {
   }
 
   async findAll() {
-    const result = await this.cartRepository.find();
-
-    if (result.length === 0) {
-      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
-    }
-
-    return result;
+    return await this.cartRepository.find();
   }
 
   async findOne(id: number) {

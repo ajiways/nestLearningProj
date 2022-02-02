@@ -11,13 +11,7 @@ export class CategoryService {
   ) {}
 
   async findAll() {
-    const result = await this.categoryRepository.find();
-
-    if (result.length === 0) {
-      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
-    }
-
-    return result;
+    return await this.categoryRepository.find();
   }
 
   async findOne(id: number) {

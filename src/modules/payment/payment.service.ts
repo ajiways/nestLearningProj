@@ -11,13 +11,7 @@ export class PaymentService {
   ) {}
 
   async findAll() {
-    const result = await this.paymentRepository.find();
-
-    if (result.length === 0) {
-      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
-    }
-
-    return result;
+    return await this.paymentRepository.find();
   }
 
   async findOne(id: number) {

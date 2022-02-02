@@ -11,13 +11,7 @@ export class ProductImageService {
   ) {}
 
   async findAll() {
-    const result = await this.productImageRepository.find();
-
-    if (result.length === 0) {
-      throw new HttpException('Nothing was found', HttpStatus.NOT_FOUND);
-    }
-
-    return result;
+    return await this.productImageRepository.find();
   }
 
   async findOne(id: number) {
